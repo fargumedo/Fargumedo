@@ -38,4 +38,9 @@ describe("React TodoMVC", () => {
         cy.get(".todo-count").contains("3 items left")
     })
 
+    it.only("adds three todos", () => {
+        cy.createDefaultTodos().as("todos")
+        cy.get("@todos").should("have.length", 3)
+    })
+
 })
