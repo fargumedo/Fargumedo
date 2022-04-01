@@ -11,7 +11,7 @@ describe("React TodoMVC", () => {
         cy.get(".new-todo").type("Buy Milk{enter}")
         cy.get(".todo-list li").should("have.length", 1)
     })
-
+/*
     it("adds three todos", () => {
         cy.get(".new-todo").type(`${TODO_ITEM_ONE}{enter}`)
         cy.get(".new-todo").type(`${TODO_ITEM_TWO}{enter}`)
@@ -20,6 +20,12 @@ describe("React TodoMVC", () => {
         cy.get(".todo-list li").eq(0).find("label").should("contain", TODO_ITEM_ONE)
         cy.get(".todo-list li").eq(1).find("label").should("contain", TODO_ITEM_TWO)
         cy.get(".todo-list li").eq(2).find("label").should("contain", TODO_ITEM_THREE)
+    })*/
+
+    //update of adds three todos test
+    it("adds three todos", () => {
+        cy.createDefaultTodos().as("todos")
+        cy.get("@todos").should("have.length", 3)
     })
 
     it("should append new items to the bottom of the list", () => {
@@ -38,9 +44,11 @@ describe("React TodoMVC", () => {
         cy.get(".todo-count").contains("3 items left")
     })
 
-    it.only("adds three todos", () => {
-        cy.createDefaultTodos().as("todos")
-        cy.get("@todos").should("have.length", 3)
+
+
+    it("does NOT display the footer when there are not todos", () => {
+        cy.get(".footer").should("not.exist")
+        cy.get(".todo-list").should("not.exist")
     })
 
 })
